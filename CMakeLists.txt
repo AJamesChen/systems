@@ -14,6 +14,8 @@ option(SYSTEMS_ENABLE_WARNINGS_AS_ERRORS "Treat compiler warnings as errors" ON)
 option(SYSTEMS_ENABLE_SANITIZERS "Build with AddressSanitizer and UndefinedBehaviorSanitizer" OFF)
 
 function(systems_configure_target target)
+    cmake_parse_arguments(SYSTEMS_TARGET "NO_SANITIZERS" "" "" ${ARGN})
+
     target_compile_definitions(${target} PRIVATE _GNU_SOURCE)
 
     target_compile_options(${target} PRIVATE
@@ -28,7 +30,7 @@ function(systems_configure_target target)
         target_compile_options(${target} PRIVATE -Werror)
     endif()
 
-    if(SYSTEMS_ENABLE_SANITIZERS)
+    if(SYSTEMS_ENABLE_SANITIZERS AND NOT SYSTEMS_TARGET_NO_SANITIZERS)
         target_compile_options(${target} PRIVATE -fsanitize=address,undefined -fno-omit-frame-pointer)
         target_link_options(${target} PRIVATE -fsanitize=address,undefined)
     endif()
@@ -38,3 +40,4 @@ enable_testing()
 
 add_subdirectory(linux/inotify)
 add_subdirectory(profiling/getrusage)
+add_subdirectory(profiling/mtrace)
