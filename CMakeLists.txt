@@ -37,3 +37,4 @@ endfunction()
 enable_testing()
 
 add_subdirectory(linux/inotify)
+add_subdirectory(profiling/getrusage)

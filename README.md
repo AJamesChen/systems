@@ -7,6 +7,7 @@ Linux systems programming, networking, concurrency, embedded Linux, RTOS, unit t
 | Area | Example | Description |
 | --- | --- | --- |
 | Linux systems programming | [inotify file watcher](linux/inotify) | Watches filesystem changes with `inotify`, `poll`, unit tests, CMake, and GitHub Actions CI. Requires kernel `CONFIG_INOTIFY_USER`. |
+| Profiling | [getrusage profiler](profiling/getrusage) | Measures user CPU, system CPU, max RSS, page faults, and context switches with `getrusage`. |
 
 ## Build
 
